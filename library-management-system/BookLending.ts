@@ -31,8 +31,8 @@ export class BookLendingStore {
 		return true
 	}
 
-	static returnBook(bookLending: BookLending) {
-
+	static returnBook(bookLending: BookLending): boolean {
+		return true
 	}
 
 	static getLendingInfoByBookItemUid(bookItemUid: string): BookLending {

@@ -1,22 +1,24 @@
 import { BookItem } from "./BookItem";
 
-interface User {
-	checkoutBookItem(bookItem: BookItem): boolean
+export interface User {
+	borrowBookItem(bookItem: BookItem): boolean
 
 	returnBookItem(bookItem: BookItem): boolean
 }
 
 export class UserImpl {
+	private totalCount: number = 0
 	constructor(private id: string) {
 
 	}
-	public checkoutBookItem(bookItem: BookItem): boolean {
-		return bookItem.checkout(this.id)
+	public borrowBookItem(bookItem: BookItem): boolean {
+		this.totalCount++;
+		return bookItem.borrow(this.id)
 	}
 
 	public returnBookItem(bookItem: BookItem): boolean {
-		bookItem.updateBookItemStatus(BookStatus.AVAILABLE);
-
+		bookItem.returnBook(bookItem.bookItemUid)
+		this.totalCount++;
 		return true
 	}
 }
